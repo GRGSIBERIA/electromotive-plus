@@ -1,0 +1,22 @@
+path: 
+  elementdb: ./output/element.db
+  probedb: ./output/probe.db
+solver:
+  time: 2.0
+  div: 0.00002267573
+probes:
+  - type: magnet field
+    size: [10, 10, 10]
+    position: [0, 0, 0]
+    divide: [4, 4, 4]
+coils:
+  - type: circle
+    radius: 5.0
+    wire resistance: 1.72e-8 # Ω*m
+    turns: 1000
+    magnetic field strength: 1.3  # AlNiCo
+    direction: [0, 1, 0]
+    position: [0, 0, 0]
+elements:
+  - type: ferromagnet
+    input: ./input/displacement.csv
