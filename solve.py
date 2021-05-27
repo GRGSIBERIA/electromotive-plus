@@ -18,14 +18,44 @@ class Probe:
 
 class MagnetField(Probe):
     def __init__(self, js):
-        super().__init__(js["pos"])
+        super().__init__(js["position"])
         self.size = np.array(js["size"])
-        self.division_size = np.array(js["div"])
+        self.divide = np.array(js["divide"])
 
 class ReferencePoint(Probe):
     def __init__(self, js):
-        super().__init__(js["pos"])
+        super().__init__(js["position"])
 
+
+
+class Coil:
+    def __init__(self, position):
+        self.position = np.array(position)
+
+class Solenoid(Coil):
+    def __init__(self, js):
+        super().__init__(js["position"])
+
+        self.radius = float(js["radius"])
+        self.wire_resistance = float(js["wire resistance"])
+        self.turns = float(js["turns"])
+        self.wire_diameter = float(js["wire diameter"])
+        self.direction = np.array(js["direction"])
+        self.height = float(js["height"])
+        
+        rounds = 2. * np.pi * self.radius
+        self.wire_length = self.turns * rounds    # mm
+        self.all_resistance = (4. * self.wire_resistance * self.wire_length) / (np.pi * self.wire_diameter**2.)
+
+        if js["extrude direction"] == "positive":
+            self.top_position = self.position
+            self.bottom_position = self.position + self.direction * self.height
+        elif js["extrude direction"] == "negative":
+            self.bottom_position = self.position
+            self.top_position = self.position + self.direction * self.height
+        elif js["extrude direction"] == "center":
+            self.top_position = self.position + self.direction * self.height * 0.5
+            self.bottom_position = self.position - self.direction * self.height * 0.5
 
 
 if __name__ == "__main__":
@@ -42,4 +72,8 @@ if __name__ == "__main__":
         if item["type"] == "magnetic field":
             pass
         elif item["type"] == "reference point":
+            pass
+    
+    for item in js["coils"]:
+        if item["type"] == "solenoid":
             pass
