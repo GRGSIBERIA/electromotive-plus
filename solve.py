@@ -13,18 +13,19 @@ args = parser.parse_args()
 
 
 class Probe:
-    def __init__(self, position):
+    def __init__(self, position: np.ndarray, output_path:str):
         self.position = np.array(position)
+        self.output_path = output_path
 
 class MagnetField(Probe):
     def __init__(self, js):
-        super().__init__(js["position"])
+        super().__init__(js["position"], js["output"])
         self.size = np.array(js["size"])
         self.divide = np.array(js["divide"])
 
 class ReferencePoint(Probe):
     def __init__(self, js):
-        super().__init__(js["position"])
+        super().__init__(js["position"], js["output"])
 
 
 
@@ -58,6 +59,11 @@ class Solenoid(Coil):
             self.bottom_position = self.position - self.direction * self.height * 0.5
 
 
+class Element:
+    def __init__(self, js):
+        pass
+
+
 if __name__ == "__main__":
     # loading config.yml
     try:
@@ -76,4 +82,8 @@ if __name__ == "__main__":
     
     for item in js["coils"]:
         if item["type"] == "solenoid":
+            pass
+
+    for item in js["elements"]:
+        if item["type"] == "ferromagnet":
             pass

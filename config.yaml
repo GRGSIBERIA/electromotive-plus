@@ -1,6 +1,3 @@
-path: 
-  elementdb: ./output/element.db
-  probedb: ./output/probe.db
 solver:
   time: 2.0
   delta time: 0.00002267573
@@ -9,6 +6,7 @@ probes:
     size: [10, 10, 10]
     position: [0, 0, 0]
     divide: [4, 4, 4]
+    output: ./output/magnet_field.csv
 coils:
   - type: solenoide
     radius: 5.0 # mm
@@ -20,6 +18,9 @@ coils:
     position: [0, 0, 0]
     height: 10 # mm
     extrude direction: positive
+    output inductance: ./output/solenoid_inductance.csv
 elements:
   - type: ferromagnet
+    permeability: 5.0e-6  # H/mm
     input: ./input/displacement.csv
+    output: ./output/ferromagnet.csv
