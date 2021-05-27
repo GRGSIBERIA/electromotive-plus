@@ -6,7 +6,7 @@ import numpy as np
 description = "This program is a solver for finding the electromotive force of coils in a uniform magnetic field of a magnetic monopole."
 parser = argparse.ArgumentParser(description=description)
 
-parser.add_argument("-c", "--config", type=str, default="./config.json", help="Specify the configuration path.")
+parser.add_argument("-c", "--config", type=str, default="./config.yaml", help="Specify the configuration path.")
 
 args = parser.parse_args()
 
@@ -34,7 +34,7 @@ if __name__ == "__main__":
         with open(args.config, "r", encoding="utf-8") as f:
             js = yaml.safe_load(f)
     except Exception as e:
-        print("Exception occured while loading config.yml", file=sys.stderr)
+        print("Exception occured while loading config.yaml", file=sys.stderr)
         print(e, file=sys.stderr)
         sys.exit(1)
 
