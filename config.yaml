@@ -22,5 +22,6 @@ coils:
 elements:
   - type: ferromagnet
     permeability: 5.0e-6  # H/mm
+    sodes: ./input/ferromagnet_node.inp
     input: ./input/displacement.csv
     output: ./output/ferromagnet.csv
