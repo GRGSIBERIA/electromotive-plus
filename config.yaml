@@ -1,6 +1,3 @@
-solver:
-  time: 2.0
-  delta time: 0.00002267573
 probes:
   - type: magnet field
     size: [10, 10, 10]
@@ -21,7 +18,9 @@ coils:
     output inductance: ./output/solenoid_inductance.csv
 elements:
   - type: ferromagnet
-    permeability: 5.0e-6  # H/mm
-    sodes: ./input/ferromagnet_node.inp
-    input: ./input/displacement.csv
-    output: ./output/ferromagnet.csv
+    permeability: 5.0e-6  # SiFe H/mm
+    node:
+      type: reference point # otherwise tetrahedron
+      position: [0, 5, 0]
+      volume: 113.1 # mm^3
+      displacement: ./input/rp_displacement.csv

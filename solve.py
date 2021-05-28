@@ -23,7 +23,7 @@ class MagnetField(Probe):
         self.size = np.array(js["size"])
         self.divide = np.array(js["divide"])
 
-class ReferencePoint(Probe):
+class ProbeReferencePoint(Probe):
     def __init__(self, js):
         super().__init__(js["position"], js["output"])
 
@@ -62,6 +62,10 @@ class Solenoid(Coil):
 class Element:
     def __init__(self, js):
         pass
+
+class NodeReferencePoint(Element):
+    def __init__(self, js):
+        super().__init__(js)
 
 
 if __name__ == "__main__":
